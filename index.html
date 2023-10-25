@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://rikikurnia.com/block/vendor/bootstrap5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://rikikurnia.com/block/vendor/bootstrap5.2.3/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://rikikurnia.com/block/vendor/rikiblock/css/riki_block.css">
+    <script src="https://rikikurnia.com/block/vendor/bootstrap5.2.3/js/bootstrap.bundle.min.js"></script>
+    <title>FAKE LOGIN</title>
+</head>
+<body>
+    <!-- login -->
+    <section id="login" class="riki-block" style="background-image: url(https://rikikurnia.com/block/vendor/rikiblock/images/hero/red.svg);">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-7 col-xl-5 text-center">
+              <div class="fdb-box">
+                <div class="row">
+                  <div class="col">
+                    <h1>Log In</h1>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <input type="text" id="username" class="form-control" placeholder="Username">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <input type="password" id="password" class="form-control mb-1" placeholder="Password">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <button onclick="login()" class="btn btn-outline-secondary" type="button">LOGIN</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- login end -->
+
+    <!-- admin content -->
+    <section id="adminContent" class="riki-block">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-6 text-center">
+              <h1>Welcome Admin</h1>
+              <p class="lead">Anda login sebagai admin</p>
+    
+              <button class="btn btn-outline-secondary" onclick="logout()">LOGOUT</button>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- admin content end -->
+
+    <!-- user content -->
+    <section id="userContent" class="riki-block">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-6 text-center">
+              <h1>Welcome User</h1>
+              <p class="lead">Anda login sebagai user</p>
+    
+              <button class="btn btn-outline-secondary" onclick="logout()">LOGOUT</button>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- user content end -->
+
+    <script type="application/javascript">
+        let username = document.getElementById('username');
+        let password = document.getElementById('password');
+        let loginForm = document.getElementById('login');
+        let adminContent = document.getElementById('adminContent');
+        let userContent = document.getElementById('userContent');
+
+        adminContent.style.display = 'none';
+        userContent.style.display = 'none';
+
+        function login() {
+            localStorage.setItem('username', username.value);
+
+            if(username.value == 'admin' && password.value == 'admin123') {
+                localStorage.setItem('role', 'admin');
+                loginForm.style.display = 'none';
+                adminContent.style.display = 'block';
+                userContent.style.display = 'none';
+            }else{
+                localStorage.setItem('role', 'user');
+                loginForm.style.display = 'none';
+                adminContent.style.display = 'none';
+                userContent.style.display = 'block';
+            }
+        }
+
+        if(localStorage.getItem('username')) {
+            loginForm.style.display = 'none';
+            
+            if(localStorage.getItem('role') == 'admin') {
+                adminContent.style.display = 'block';
+                userContent.style.display = 'none';
+            }else {
+                adminContent.style.display = 'none';
+                userContent.style.display = 'block';
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            location.reload();
+        }
+        
+    </script>
+</body>
+</html>
